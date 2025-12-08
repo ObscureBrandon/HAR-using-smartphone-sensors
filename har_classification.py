@@ -2,14 +2,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 from sklearn.linear_model import SGDClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, log_loss
 from sklearn.model_selection import learning_curve
-import warnings
-warnings.filterwarnings('ignore')
 
 # ============================================================
 # STEP 1: PREPROCESSING
@@ -54,7 +53,7 @@ print("\n" + "=" * 60)
 print("STEP 2: MODEL TRAINING")
 print("=" * 60)
 
-# --- 2.1 SGDClassifier with log_loss ---
+# --- 2.1 SGDClassifier ---
 print("\n2.1 Training SGDClassifier")
 
 sgd_model = SGDClassifier(loss='log_loss', random_state=42)
@@ -142,9 +141,11 @@ axes[1].legend()
 axes[1].grid(True)
 
 plt.tight_layout()
-plt.savefig('complexity_loss_curve.png', dpi=150)
+
+os.makedirs('results', exist_ok=True)
+plt.savefig('results/complexity_loss_curve.png', dpi=150)
 plt.close()
-print("Saved: complexity_loss_curve.png")
+print("Saved: results/complexity_loss_curve.png")
 
 print("\n" + "=" * 60)
 print("✓ Step 1 & Step 2 Completed!")
