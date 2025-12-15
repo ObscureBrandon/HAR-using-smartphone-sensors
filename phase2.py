@@ -18,59 +18,125 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import EarlyStopping
 import joblib
 
+
 def load_signal(file_path):
     """
     Loads a signal file of shape (samples, 128)
     """
     return np.loadtxt(file_path)
 
+
 tf.random.set_seed(42)
 
 # enter path here
-#train/intertial signals/
+# train/intertial signals/
 
-body_acc_x_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt")
-body_acc_y_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_y_train.txt")
-body_acc_z_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_z_train.txt")
+body_acc_x_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_x_train.txt"
+)
+body_acc_y_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_y_train.txt"
+)
+body_acc_z_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_acc_z_train.txt"
+)
 
-body_gyro_x_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_x_train.txt")
-body_gyro_y_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_y_train.txt")
-body_gyro_z_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_z_train.txt")
+body_gyro_x_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_x_train.txt"
+)
+body_gyro_y_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_y_train.txt"
+)
+body_gyro_z_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/body_gyro_z_train.txt"
+)
 
-total_acc_x_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_x_train.txt")
-total_acc_y_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_y_train.txt")
-total_acc_z_train = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_z_train.txt")
+total_acc_x_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_x_train.txt"
+)
+total_acc_y_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_y_train.txt"
+)
+total_acc_z_train = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/Inertial Signals/total_acc_z_train.txt"
+)
 
 # test/inertial signals/
-body_acc_x_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_x_test.txt")
-body_acc_y_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_y_test.txt")
-body_acc_z_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_z_test.txt")
+body_acc_x_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_x_test.txt"
+)
+body_acc_y_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_y_test.txt"
+)
+body_acc_z_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_acc_z_test.txt"
+)
 
-body_gyro_x_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_x_test.txt")
-body_gyro_y_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_y_test.txt")
-body_gyro_z_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_z_test.txt")
+body_gyro_x_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_x_test.txt"
+)
+body_gyro_y_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_y_test.txt"
+)
+body_gyro_z_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/body_gyro_z_test.txt"
+)
 
-total_acc_x_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_x_test.txt")
-total_acc_y_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_y_test.txt")
-total_acc_z_test = load_signal("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_z_test.txt")
+total_acc_x_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_x_test.txt"
+)
+total_acc_y_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_y_test.txt"
+)
+total_acc_z_test = load_signal(
+    "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/Inertial Signals/total_acc_z_test.txt"
+)
 
-X_train = np.stack([
-    body_acc_x_train, body_acc_y_train, body_acc_z_train,
-    body_gyro_x_train, body_gyro_y_train, body_gyro_z_train,
-    total_acc_x_train, total_acc_y_train, total_acc_z_train
-], axis=2)
+X_train = np.stack(
+    [
+        body_acc_x_train,
+        body_acc_y_train,
+        body_acc_z_train,
+        body_gyro_x_train,
+        body_gyro_y_train,
+        body_gyro_z_train,
+        total_acc_x_train,
+        total_acc_y_train,
+        total_acc_z_train,
+    ],
+    axis=2,
+)
 
-X_test = np.stack([
-    body_acc_x_test, body_acc_y_test, body_acc_z_test,
-    body_gyro_x_test, body_gyro_y_test, body_gyro_z_test,
-    total_acc_x_test, total_acc_y_test, total_acc_z_test
-], axis=2)
+X_test = np.stack(
+    [
+        body_acc_x_test,
+        body_acc_y_test,
+        body_acc_z_test,
+        body_gyro_x_test,
+        body_gyro_y_test,
+        body_gyro_z_test,
+        total_acc_x_test,
+        total_acc_y_test,
+        total_acc_z_test,
+    ],
+    axis=2,
+)
 
 print("Train shape:", X_train.shape)  # (samples, 128, 9)
 print("Test shape :", X_test.shape)
 
-y_train = np.loadtxt("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/y_train.txt").astype(int) - 1
-y_test  = np.loadtxt("/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/y_test.txt").astype(int) - 1
+y_train = (
+    np.loadtxt(
+        "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/train/y_train.txt"
+    ).astype(int)
+    - 1
+)
+y_test = (
+    np.loadtxt(
+        "/content/drive/MyDrive/HAR-phase2-bobus/UCI HAR Dataset/test/y_test.txt"
+    ).astype(int)
+    - 1
+)
 
 num_classes = len(np.unique(y_train))
 num_classes
@@ -78,50 +144,44 @@ num_classes
 scaler = StandardScaler()
 # reshape to 2D for scaling
 X_train_2d = X_train.reshape(-1, X_train.shape[2])
-X_test_2d  = X_test.reshape(-1, X_test.shape[2])
+X_test_2d = X_test.reshape(-1, X_test.shape[2])
 
 # fit ONLY on training data
 X_train_scaled = scaler.fit_transform(X_train_2d)
-X_test_scaled  = scaler.transform(X_test_2d)
+X_test_scaled = scaler.transform(X_test_2d)
 
 # reshape back to 3D
 X_train_scaled = X_train_scaled.reshape(X_train.shape)
-X_test_scaled  = X_test_scaled.reshape(X_test.shape)
+X_test_scaled = X_test_scaled.reshape(X_test.shape)
 
-early_stop = EarlyStopping(
-    monitor='val_loss',
-    patience=5,
-    restore_best_weights=True
+
+model = Sequential(
+    [
+        LSTM(64, input_shape=(128, 9), return_sequences=True),
+        LSTM(32),
+        Dropout(0.3),
+        Dense(32, activation="relu"),  # learns
+        Dense(num_classes, activation="softmax"),  # classification
+    ]
 )
-
-model = Sequential([
-    LSTM(64, input_shape=(128, 9),return_sequences = True),
-    LSTM(32),
-    Dropout(0.3),
-    Dense(32, activation='relu'), #learns
-    Dense(num_classes, activation='softmax') #classification
-])
 
 model.compile(
     optimizer=Adam(learning_rate=0.0001),
-    loss='sparse_categorical_crossentropy',
-    metrics=['accuracy']
+    loss="sparse_categorical_crossentropy",
+    metrics=["accuracy"],
 )
 
 model.summary()
 
-early_stop = EarlyStopping(
-    monitor='val_loss',
-    patience=5,
-    restore_best_weights=True
-)
+early_stop = EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True)
 
 history = model.fit(
-    X_train_scaled, y_train,
+    X_train_scaled,
+    y_train,
     validation_split=0.2,
     epochs=30,
     batch_size=32,
-  # callbacks=[early_stop]
+    # callbacks=[early_stop]
 )
 
 y_test_proba = model.predict(X_test_scaled)
@@ -131,12 +191,12 @@ y_test_pred = np.argmax(y_test_proba, axis=1)
 print("\nLSTM Test Performance")
 print("Accuracy :", accuracy_score(y_test, y_test_pred))
 
-print("Precision:", precision_score(y_test, y_test_pred, average='macro'))
+print("Precision:", precision_score(y_test, y_test_pred, average="macro"))
 print("Log Loss :", log_loss(y_test, y_test_proba))
 
-plt.figure(figsize=(8,5))
-plt.plot(history.history['loss'], label='Train Loss')
-plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.figure(figsize=(8, 5))
+plt.plot(history.history["loss"], label="Train Loss")
+plt.plot(history.history["val_loss"], label="Validation Loss")
 plt.xlabel("Epoch")
 
 plt.ylabel("Loss")
@@ -144,3 +204,4 @@ plt.title("LSTM Training vs Validation Loss")
 plt.legend()
 plt.grid(True)
 plt.show()
+
