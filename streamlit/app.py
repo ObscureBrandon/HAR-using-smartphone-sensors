@@ -6,31 +6,31 @@ import joblib
 
 @st.cache_resource
 def load_scaler():
-    return joblib.load('scaler.pkl')
+    return joblib.load("scaler.pkl")
 
 
 @st.cache_resource
 def load_pca():
-    return joblib.load('pca.pkl')
+    return joblib.load("pca.pkl")
 
 
 @st.cache_resource
 def load_random_forest():
-    return joblib.load('random_forest_model.pkl')
+    return joblib.load("random_forest_model.pkl")
 
 
 @st.cache_resource
 def load_sgd():
-    return joblib.load('SGD_model.pkl')
+    return joblib.load("SGD_model.pkl")
 
 
 CLASS_NAMES = {
-    0: 'WALKING',
-    1: 'WALKING_UPSTAIRS',
-    2: 'WALKING_DOWNSTAIRS',
-    3: 'SITTING',
-    4: 'STANDING',
-    5: 'LAYING',
+    1: "WALKING",
+    2: "WALKING_UPSTAIRS",
+    3: "WALKING_DOWNSTAIRS",
+    4: "SITTING",
+    5: "STANDING",
+    6: "LAYING",
 }
 
 # Load shared resources
@@ -39,10 +39,7 @@ pca = load_pca()
 
 # Sidebar - Model Selection
 st.sidebar.title("Model Selection")
-model_choice = st.sidebar.radio(
-    "Choose a model:",
-    ("Random Forest", "SGD")
-)
+model_choice = st.sidebar.radio("Choose a model:", ("Random Forest", "SGD"))
 
 # Load selected model
 if model_choice == "Random Forest":
@@ -55,7 +52,7 @@ st.title("Human Activity Recognition")
 st.write(f"**Current Model:** {model_choice}")
 st.write("Upload a CSV file for prediction")
 
-uploaded_file = st.file_uploader("Choose a CSV file", type='csv')
+uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
 
 if uploaded_file is not None:
     try:
@@ -73,10 +70,14 @@ if uploaded_file is not None:
         y_pred_proba = model.predict_proba(x_pca)
 
         # Build results dataframe
-        results = pd.DataFrame({
-            'Predicted Activity': [CLASS_NAMES[i] for i in y_pred],
-            'Confidence (%)': [f"{np.max(proba) * 100:.2f}%" for proba in y_pred_proba]
-        })
+        results = pd.DataFrame(
+            {
+                "Predicted Activity": [CLASS_NAMES[i] for i in y_pred],
+                "Confidence (%)": [
+                    f"{np.max(proba) * 100:.2f}%" for proba in y_pred_proba
+                ],
+            }
+        )
 
         st.write("### Prediction Results")
         st.dataframe(results)
